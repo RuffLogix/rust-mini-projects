@@ -6,7 +6,7 @@ struct Argument {
     output_file: String,
 }
 
-fn get_file_content(file: String) -> String {
+fn get_file_content(file: &str) -> String {
     match fs::read_to_string(file) {
         Ok(v) => v,
         Err(e) => {
@@ -17,7 +17,7 @@ fn get_file_content(file: String) -> String {
 }
 
 pub fn copy_file(input_file: &str, output_file: &str) {
-    let data = get_file_content(String::from(input_file));
+    let data = get_file_content(input_file);
 
     match fs::write(output_file, data) {
         Ok(_) => (),
